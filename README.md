@@ -34,8 +34,8 @@ The hosted demo still loads PDF rendering libraries from cdnjs. For stricter off
 Clone the repository and run a static file server:
 
 ```bash
-git clone https://github.com/cclank/online-signature.git
-cd online-signature
+git clone https://github.com/cclank/localsign.git
+cd localsign
 python3 -m http.server 5173
 ```
 
