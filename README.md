@@ -1,11 +1,12 @@
-# Inkline Online Signature
+# LocalSign 本地安全签名
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-101820.svg)](LICENSE)
 ![Local First](https://img.shields.io/badge/local--first-yes-0f5c66.svg)
 ![No Backend](https://img.shields.io/badge/backend-none-c08b3e.svg)
 ![Client Side](https://img.shields.io/badge/documents-stay%20in%20browser-224f9c.svg)
+![Self Host](https://img.shields.io/badge/self--host-ready-c08b3e.svg)
 
-Inkline Online Signature is a lightweight browser app for signing documents locally. It was built for a common workflow: many documents need a handwritten signature, but printing, signing, scanning, and photographing them wastes time. Existing online signing services can be convenient, yet uploading private contracts or forms creates avoidable risk. This project keeps the signing flow local, open source, and easy to self host.
+LocalSign is a lightweight browser app for signing documents locally and safely. It was built for a common workflow: many documents need a handwritten signature, but printing, signing, scanning, and photographing them wastes time. Hosted signing services can be convenient, yet uploading private contracts or forms creates avoidable risk. This project keeps the signing flow local, open source, and easy to self host.
 
 ## Features
 
@@ -19,7 +20,7 @@ Inkline Online Signature is a lightweight browser app for signing documents loca
 
 ## Privacy Model
 
-Inkline is designed as a local first tool.
+LocalSign is designed as a local first tool.
 
 - Files are read by the browser with `FileReader`.
 - Signatures and PDF overlays are generated in the browser.

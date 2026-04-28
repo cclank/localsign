@@ -1,8 +1,8 @@
 {
-  "name": "online-signature",
+  "name": "localsign",
   "version": "0.1.0",
   "private": false,
-  "description": "A local-first, browser-only signature tool for signing images and PDFs without uploading documents.",
+  "description": "A local-first, browser-only signature app for signing images and PDFs without uploading documents.",
   "type": "module",
   "scripts": {
     "dev": "python3 -m http.server 5173",
