@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inkline 在线签字</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="panel">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span>
+          </div>
+          <div>
+            <p class="eyebrow">Inkline</p>
+            <h1>在线签字台</h1>
+          </div>
+        </div>
+
+        <section class="control-block">
+          <div class="block-title">
+            <span>文件</span>
+            <small>图片或 PDF</small>
+          </div>
+          <label class="file-drop" for="documentInput">
+            <input id="documentInput" type="file" accept="image/*,application/pdf,.pdf" />
+            <span class="file-icon">+</span>
+            <span>
+              <strong>上传合同或表单</strong>
+              <small>支持 PNG、JPG、WebP、PDF</small>
+            </span>
+          </label>
+        </section>
+
+        <section class="control-block">
+          <div class="block-title">
+            <span>笔迹</span>
+            <small>即时生效</small>
+          </div>
+          <div class="field-grid">
+            <label>
+              <span>颜色</span>
+              <input id="inkColor" type="color" value="#101820" />
+            </label>
+            <label>
+              <span>粗细</span>
+              <input id="inkSize" type="range" min="1" max="12" value="4" />
+            </label>
+          </div>
+          <div class="swatches" aria-label="常用颜色">
+            <button class="swatch active" data-color="#101820" style="--swatch: #101820" aria-label="黑色"></button>
+            <button class="swatch" data-color="#0f5c66" style="--swatch: #0f5c66" aria-label="墨绿色"></button>
+            <button class="swatch" data-color="#8a1c1c" style="--swatch: #8a1c1c" aria-label="深红色"></button>
+            <button class="swatch" data-color="#224f9c" style="--swatch: #224f9c" aria-label="蓝色"></button>
+          </div>
+        </section>
+
+        <section class="control-block">
+          <div class="block-title">
+            <span>签署信息</span>
+            <small>可选</small>
+          </div>
+          <label class="text-field">
+            <span>签署人</span>
+            <input id="signerName" type="text" placeholder="输入姓名" autocomplete="name" />
+          </label>
+          <label class="text-field">
+            <span>日期</span>
+            <input id="signDate" type="date" />
+          </label>
+        </section>
+
+        <section class="control-block actions">
+          <button id="undoBtn" class="icon-btn" title="撤销" aria-label="撤销">↶</button>
+          <button id="redoBtn" class="icon-btn" title="重做" aria-label="重做">↷</button>
+          <button id="clearBtn" class="text-btn">清空</button>
+          <button id="openSignaturePadBtn" class="text-btn">放大签字</button>
+          <button id="downloadSignatureBtn" class="text-btn">导出签名</button>
+          <button id="saveSignatureBtn" class="text-btn">存为备用</button>
+          <button id="applySavedSignatureBtn" class="text-btn">使用备用</button>
+          <button id="downloadDocumentBtn" class="primary-btn">导出签署稿</button>
+        </section>
+      </aside>
+
+      <section class="workspace" aria-label="签署工作区">
+        <div class="topbar">
+          <div>
+            <p>当前文件</p>
+            <strong id="documentName">空白签署页</strong>
+          </div>
+          <div class="topbar-tools">
+            <div class="page-controls hidden" id="pageControls" aria-label="PDF 页码">
+              <button id="prevPageBtn" class="mini-btn" aria-label="上一页">‹</button>
+              <span id="pageIndicator">1 / 1</span>
+              <button id="nextPageBtn" class="mini-btn" aria-label="下一页">›</button>
+            </div>
+            <div class="status-pill" id="strokeStatus">未签字</div>
+          </div>
+        </div>
+
+        <div class="document-stage">
+          <canvas id="documentCanvas" class="document-canvas" aria-label="文档预览"></canvas>
+          <canvas id="signatureCanvas" class="signature-canvas" aria-label="签名画布"></canvas>
+          <div class="signature-guide" id="signatureGuide">
+            <button id="signatureMoveHandle" class="signature-move" type="button" aria-label="移动签名框" title="移动签名框">移动</button>
+            <span>在此处签字</span>
+          </div>
+        </div>
+
+        <div class="workspace-footer">
+          <div class="hint">拖动签名框上的移动手柄可调整位置。支持鼠标、触控板和手机手写。</div>
+          <button id="fitBtn" class="quiet-btn">重置画布</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="signature-pad-modal" id="signaturePadModal" hidden>
+      <div class="signature-pad-sheet" role="dialog" aria-modal="true" aria-label="放大签字板">
+        <div class="signature-pad-head">
+          <div>
+            <p class="eyebrow">Signature Pad</p>
+            <h2>放大签字</h2>
+          </div>
+          <button id="padCancelBtn" class="quiet-btn">关闭</button>
+        </div>
+        <div class="pad-canvas-wrap">
+          <canvas id="signaturePadCanvas" aria-label="放大签字画布"></canvas>
+        </div>
+        <div class="signature-pad-actions">
+          <button id="padClearBtn" class="text-btn">清空</button>
+          <button id="padApplyBtn" class="primary-btn">放入签名框</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

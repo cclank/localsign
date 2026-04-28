@@ -1,0 +1,19 @@
+{
+  "name": "online-signature",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A local-first, browser-only signature tool for signing images and PDFs without uploading documents.",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "check": "node --check app.js"
+  },
+  "keywords": [
+    "signature",
+    "pdf",
+    "local-first",
+    "privacy",
+    "client-side"
+  ],
+  "license": "MIT"
+}
