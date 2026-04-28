@@ -8,6 +8,14 @@
 
 LocalSign is a lightweight browser app for signing documents locally and safely. It was built for a common workflow: many documents need a handwritten signature, but printing, signing, scanning, and photographing them wastes time. Hosted signing services can be convenient, yet uploading private contracts or forms creates avoidable risk. This project keeps the signing flow local, open source, and easy to self host.
 
+## Demo
+
+Production deployment:
+
+```text
+https://online-signature-fawn.vercel.app
+```
+
 ## Features
 
 - Sign blank pages, images, and PDF files directly in the browser.
